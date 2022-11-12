@@ -2,28 +2,27 @@ const { CommandClient } = require('eris')
 
 // Stupid ass bot creation
 async function init(token) {
-    const stupidAssBot = new CommandClient(`Bot ${token}`, { intents: ['guilds'], maxShards: 'auto',restMode: true })
+    const Discord = new CommandClient(`Bot ${token}`, { intents: ['guilds'], maxShards: 'auto',restMode: true })
     // Register the stupid ass command
-    stupidAssBot.on('ready', async () => {
-        await stupidAssBot.bulkEditCommands([{
-            name: 'lol',
-            description: 'I hate discord so much you cannot believe it',
+    Discord.on('ready', async () => {
+        await Discord.bulkEditCommands([{
+            name: 'status',
+            description: 'Bot status',
             type: 1,
         }])
-        console.log(`Paste the URL below into your browser to invite your bot!\nhttps://discord.com/oauth2/authorize?client_id=${stupidAssBot.user.id}&scope=applications.commands%20bot&permissions=3072`)
+        console.log(`Paste the URL below into your browser to invite your bot!\nhttps://discord.com/oauth2/authorize?client_id=${Discord.user.id}&scope=applications.commands%20bot&permissions=8`)
     })
     // Stupid ass interaction creation event
-    stupidAssBot.on('interactionCreate', async (interaction) => {
-        if (interaction?.data?.name === 'lol') {
+    Discord.on('interactionCreate', async (interaction) => {
+        if (interaction?.data?.name === 'status') {
             await interaction.createMessage({
-                content: 'According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway, because bees don\'t care what humans think is impossible.'
+                content: 'Yey! The bot is currently online! Invite it to your discord server by clicking this link'
             })
-            console.log('Self destructing...')
-            process.exit(0)
+            console.log('This shit aint have self destruct so your good to go')
         }
     })
-    stupidAssBot.connect();
+    Discord.connect();
 }
 
-const tokenFromStupidCommand = process.argv[2]
-init(tokenFromStupidCommand);
+const tokenFromDiscordCommand = process.argv[2]
+init(tokenFromDiscordCommand);
